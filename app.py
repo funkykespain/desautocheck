@@ -261,8 +261,8 @@ def main():
             value=str(row.get('Desautomatizacion', '')),
             height=150,
             help=(
-                "Texto extraído automáticamente de algúncorpus en el que la paremia canónica aparece modificada. "
-                "Revisa que la Desautomatización sea real e intencional y no paráfrasis casual. Se pueden corregir errores tipográficos o de puntuación."
+                "Texto extraído del corpus en el que la paremia canónica aparece modificada. "
+                "Revisa que la modificación sea real e intencional, no un error tipográfico o paráfrasis casual."
             ),
         )
 
@@ -358,6 +358,20 @@ def main():
             f"<p style='text-align: center;'>Fila {curr_idx + 1} de {total}</p>",
             unsafe_allow_html=True,
         )
+
+    # --- BOTÓN DE DESCARGA ---
+    st.sidebar.divider()
+    st.sidebar.subheader("Exportar resultados")
+    if os.path.exists(CSV_FILE):
+        with open(CSV_FILE, "rb") as file:
+            st.sidebar.download_button(
+                label="📥 Descargar CSV final",
+                data=file,
+                file_name="dp_revisado.csv",
+                mime="text/csv",
+            )
+    else:
+        st.sidebar.warning("No se encontró el archivo CSV para exportar.")
 
 
 if __name__ == "__main__":
