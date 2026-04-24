@@ -191,7 +191,21 @@ def safe_index(options, value):
 
 
 def main():
-    st.title("🔍 Panel de Revisión Filológica")
+    # CSS para reducir espacios verticales globales
+    st.markdown("""
+        <style>
+            .block-container { padding-top: 1rem !important; padding-bottom: 0.5rem !important; }
+            h1 { margin-bottom: 0 !important; font-size: 1.6rem !important; }
+            .stProgress { margin-bottom: 0.2rem !important; }
+            .stAlert { padding: 0.4rem 0.6rem !important; }
+            div[data-testid="stVerticalBlock"] > div { gap: 0.3rem !important; }
+            hr { margin: 0.4rem 0 !important; }
+            .stTextArea textarea { min-height: 60px !important; }
+            .stForm { padding: 0.5rem !important; }
+        </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown("### 🔍 Panel de Revisión Filológica")
 
     if 'df' not in st.session_state:
         st.session_state.df = load_data()
@@ -217,7 +231,7 @@ def main():
     progreso = revisados / total if total > 0 else 0
 
     st.progress(progreso)
-    st.write(f"**Progreso:** {revisados} de {total} filas revisadas ({progreso:.1%})")
+    st.caption(f"Progreso: {revisados} de {total} filas revisadas ({progreso:.1%})")
 
     if revisados == total and total > 0:
         st.success("🎉 ¡Felicitaciones! Todas las desautomatizaciones han sido revisadas.")
@@ -246,9 +260,9 @@ def main():
     st.divider()
 
     # Paremia Canónica
-    st.markdown("### Paremia Canónica")
     st.markdown(
-        f"<h1 style='text-align: center; color: #1E88E5;'>{row.get('Paremia_Canonica', 'N/A')}</h1>",
+        f"<p style='text-align:center; color:#1E88E5; font-size:1.5rem; font-weight:700; margin:0.2rem 0 0.4rem 0;'>"
+        f"{row.get('Paremia_Canonica', 'N/A')}</p>",
         unsafe_allow_html=True,
     )
 
@@ -259,7 +273,7 @@ def main():
         new_desaut = st.text_area(
             "Desautomatización candidata",
             value=str(row.get('Desautomatizacion', '')),
-            height=150,
+            height=90,
             help=(
                 "Texto extraído del corpus en el que la paremia canónica aparece modificada. "
                 "Revisa que la modificación sea real e intencional, no un error tipográfico o paráfrasis casual."
@@ -309,7 +323,7 @@ def main():
             new_elementos = st.text_area(
                 "Elementos Sustituidos",
                 value=str(row.get('Elementos_Sustituidos', '') if pd.notna(row.get('Elementos_Sustituidos')) else ""),
-                height=108,
+                height=70,
                 help=(
                     "Palabras o segmentos de la paremia canónica que han sido reemplazados, añadidos o suprimidos. "
                     "Anótalos en el orden en que aparecen en la paremia original, separados por → si hay sustitución directa "
