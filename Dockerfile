@@ -21,7 +21,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Exponer el puerto por defecto de Streamlit
-EXPOSE 8501
+EXPOSE 8502
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["streamlit", "run", "revisor_paremias.py", "--server.port=8501", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "revisor_paremias.py", "--server.port=8502", "--server.address=0.0.0.0"]
