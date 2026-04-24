@@ -194,7 +194,7 @@ def main():
     # CSS para reducir espacios verticales globales
     st.markdown("""
         <style>
-            .block-container { padding-top: 1rem !important; padding-bottom: 0.5rem !important; }
+            .block-container { padding-top: 2.5rem !important; padding-bottom: 0.5rem !important; }
             h1 { margin-bottom: 0 !important; font-size: 1.6rem !important; }
             .stProgress { margin-bottom: 0.2rem !important; }
             .stAlert { padding: 0.4rem 0.6rem !important; }
