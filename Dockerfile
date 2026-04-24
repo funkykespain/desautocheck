@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8502
 
 # Comando para ejecutar la aplicación
-ENTRYPOINT ["streamlit", "run", "revisor_paremias.py", "--server.port=8502", "--server.address=0.0.0.0"]
+ENTRYPOINT ["streamlit", "run", "app.py", "--server.port=8502", "--server.address=0.0.0.0"]
